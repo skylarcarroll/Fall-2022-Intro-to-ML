@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt 
+
+beta0true = 1
+beta1true = 1
+
+beta = np.asarray([beta0true, beta1true])
+
+x = np.linspace(0,1,10)
+
+
+# feature matrix 
+# hstack : stack numpy arrays horizontally
+# vstack : stack vertically
+
+
+Xtilde = np.hstack((np.ones((len(x), 1)), x.reshape(-1,1)))
+
+
+# Xtilde = [1, x] = [1, x^(1); 1 x^(2); ... ]
+
+t = np.matmul(Xtilde, np.asarray(beta))
+
+tnoisy = t+np.random.normal(0,.1, len(t))
+
+plt.scatter(x, tnoisy, c='r')
+plt.plot(x, t)
+plt.show()
